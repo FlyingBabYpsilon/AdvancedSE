@@ -1,17 +1,47 @@
+<!-- home.page.html -->
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Tab 1
+      Overview
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content [fullscreen]="true" class="ion-padding">
+  <ion-slides [options]="slideOpt">
+    <ion-slide>
+      <ion-card>
+        <img src=".\assets\pic\lake.jpg">
+        <ion-card-header>
+          <ion-card-subtitle>Hey jo there</ion-card-subtitle>
+          <ion-card-title>€€€ left for this month</ion-card-title>
+        </ion-card-header>
+        <ion-card-content></ion-card-content>
+      </ion-card>
+  
+    </ion-slide>
+    <ion-slide>
+      <ion-card >
+        <img src=".\assets\pic\money-rain.jpg">
+        <ion-card-header>
+          <ion-card-subtitle>Incoming Money</ion-card-subtitle>
+          <ion-card-title>You have earned €€€ money this Month! <br> have fun with it</ion-card-title>
+        </ion-card-header>
+      <!--   <ion-card-content>
+          Place for some extra informations
+        </ion-card-content> -->
+      </ion-card>
+    </ion-slide>
+    <ion-slide>
+      <ion-card>
+        <img src=".\assets\pic\spent.jpg">
+        <ion-card-header>
+          <ion-card-subtitle>Outgoing Money</ion-card-subtitle>
+          <ion-card-title>You have spent €€€ so far this Month!</ion-card-title>
+        </ion-card-header>
+      </ion-card>
+    </ion-slide>
+   
+  </ion-slides>
 
-  <app-explore-container name="Tab 1 page"></app-explore-container>
 </ion-content>

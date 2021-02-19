@@ -1,7 +1,10 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Tab 3
+      Outcome
+      <button ion-button>
+        <ion-icon name="remove"></ion-icon>
+     </button>
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -13,5 +16,55 @@
     </ion-toolbar>
   </ion-header>
 
-  <app-explore-container name="Tab 3 page"></app-explore-container>
+    <ion-list>
+      <ion-list-header>
+        Recent Conversations
+      </ion-list-header>
+
+      <ion-item>
+        <ion-avatar slot="start">
+          <img src="./avatar-finn.png">
+        </ion-avatar>
+        <ion-label>
+          <h2>Title 1</h2>
+          <h3>€€€</h3>
+          <p>Description</p>
+        </ion-label>
+      </ion-item>
+
+      <ion-item>
+        <ion-avatar slot="start">
+          <img src="./avatar-finn.png">
+        </ion-avatar>
+        <ion-label>
+          <h2>Title 2</h2>
+          <h3>€€€</h3>
+          <p>Description</p>
+        </ion-label>
+      </ion-item>
+
+      <ion-item>
+        <ion-avatar slot="start">
+          <img src="./avatar-finn.png">
+        </ion-avatar>
+        <ion-label>
+          <h2>Title 3</h2>
+          <h3>€€€</h3>
+          <p>Description</p>
+        </ion-label>
+      </ion-item>
+
+      <ion-item>
+        <ion-avatar slot="start">
+          <img src="./avatar-finn.png">
+        </ion-avatar>
+        <ion-label>
+          <h2>Title 4</h2>
+          <h3>€€€</h3>
+          <p>Description</p>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+
+  
 </ion-content>

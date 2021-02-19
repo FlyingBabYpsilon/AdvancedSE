@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { IonSlides } from '@ionic/angular';
 
 @Component({
   selector: 'app-tab1',
@@ -7,6 +8,12 @@ import { Component } from '@angular/core';
 })
 export class Tab1Page {
 
-  constructor() {}
+  slideOpt ={
+    direction: 'horizontal',
+    slidesPerView: 1,
+    pagination: {
+      el: '.swiper-pagination',
+    }
+  }
 
 }
