@@ -8,7 +8,9 @@
 </ion-header>
 
 <ion-content [fullscreen]="true" class="ion-padding">
-  <ion-slides [options]="slideOpt">
+
+  <ion-slides [options]="slideOpthori">
+
     <ion-slide>
       <ion-card>
         <img src=".\assets\pic\lake.jpg">
@@ -16,7 +18,9 @@
           <ion-card-subtitle>Hey jo there</ion-card-subtitle>
           <ion-card-title>€€€ left for this month</ion-card-title>
         </ion-card-header>
-        <ion-card-content></ion-card-content>
+        <ion-card-content>          
+          <canvas #barCanvas style="position: relative; height:20vh; width:40vw"></canvas>
+        </ion-card-content>
       </ion-card>
   
     </ion-slide>
@@ -32,6 +36,7 @@
         </ion-card-content> -->
       </ion-card>
     </ion-slide>
+
     <ion-slide>
       <ion-card>
         <img src=".\assets\pic\spent.jpg">
@@ -39,9 +44,11 @@
           <ion-card-subtitle>Outgoing Money</ion-card-subtitle>
           <ion-card-title>You have spent €€€ so far this Month!</ion-card-title>
         </ion-card-header>
+        <ion-card-content>
+          <canvas #doughnutCanvas style="position: relative; height:20vh; width:40vw"></canvas>
+        </ion-card-content>
       </ion-card>
     </ion-slide>
-   
   </ion-slides>
 
 </ion-content>
