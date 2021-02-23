@@ -1,18 +1,19 @@
 import { IonicModule } from '@ionic/angular';
+import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Tab1Page } from './tab1.page';
+import { IncomePage } from './income.page';
 
-import { Tab1PageRoutingModule } from './tab1-routing.module';
+import { IncomePageRoutingModule } from './income-routing.module';
 
 @NgModule({
   imports: [
     IonicModule,
     CommonModule,
     FormsModule,
-    Tab1PageRoutingModule
+    IncomePageRoutingModule
   ],
-  declarations: [Tab1Page]
+  declarations: [IncomePage]
 })
-export class Tab1PageModule {}
+export class IncomePageModule {}
