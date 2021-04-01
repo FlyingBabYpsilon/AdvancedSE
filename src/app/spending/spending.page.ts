@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-spending',
@@ -7,6 +8,25 @@ import { Component } from '@angular/core';
 })
 export class SpendingPage {
 
-  constructor() {}
+  private listItems: any; 
+
+  constructor(public navCtrl: NavController) {
+    this.listItems = [{
+      name: "Imke",
+      value: 1
+    },{
+      name: "2",
+      value: 2
+    }
+  ];
+
+  }
+
+  private onAddBtnClicked(): void{
+    this.listItems.push({
+      name: "testi",
+      value: 3
+    });
+  }
 
 }

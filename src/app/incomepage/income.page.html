@@ -1,22 +1,17 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Income
-          
-      <button ion-button side="right">
-         <ion-icon name="add"></ion-icon>
-      </button>
-
-    </ion-title>
-    
+      Incoming Money
+    </ion-title> 
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Income</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <!-- fab placed to the (vertical) center and end -->
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button routerLink="/addincome">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 
 </ion-content>
