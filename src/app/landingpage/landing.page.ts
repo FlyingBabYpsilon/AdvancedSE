@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { Chart } from 'chart.js';
+import { AuthenticationService } from '../shared/authentication-service';
 
 @Component({
   selector: 'app-landing',
@@ -25,7 +26,7 @@ export class LandingPage implements AfterViewInit {
   doughnutChart: any;
   lineChart: any;
 
-  constructor() { }
+  constructor( public authService: AuthenticationService) { }
 
   ngAfterViewInit() {
     this.barChartMethod();

@@ -14,6 +14,19 @@ const routes: Routes = [
     path: 'addspending',
     loadChildren: () => import('./addspending/addspending.module').then( m => m.AddspendingPageModule)
   },
+  {
+    path: 'login',
+    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
+  },  {
+    path: 'registration',
+    loadChildren: () => import('./registration/registration.module').then( m => m.RegistrationPageModule)
+  },
+  {
+    path: 'verify-email',
+    loadChildren: () => import('./verify-email/verify-email.module').then( m => m.VerifyEmailPageModule)
+  }
+
+
 ];
 @NgModule({
   imports: [
