@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>addspending</ion-title>
+    <ion-title>addincome</ion-title>
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
@@ -8,5 +8,53 @@
 </ion-header>
 
 <ion-content>
-
-</ion-content>
+  <form [formGroup]="addSpendingForm" (submit)="createSpending(spendDate,spentAmt,spendDesc,spendRemark)">
+    <ion-list>
+      <ion-item>
+        <ion-label color="primary">Date</ion-label>
+        <ion-datetime displayFormat="DD/MM/YYYY" pickerFormat="DD MMM YYYY"[(ngModel)]="spendDate" formControlName="date"
+        [class.invalid]="!addSpendingForm.controls.date.valid && blur"></ion-datetime>
+        
+      </ion-item>
+      <ion-item>
+        <ion-label color="primary">Amount</ion-label>
+        <ion-input type = "number" placeholder="$" [(ngModel)] = "spentAmt" formControlName="amount"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label color="primary">Category</ion-label> 
+        <ion-select [(ngModel)]= "spendCate" formControlName="category">
+          <ion-select-option value ="Food">Food</ion-select-option>
+          <ion-select-option value ="Transport">Transport</ion-select-option>
+          <ion-select-option value ="Shopping">Shopping</ion-select-option>
+          <ion-select-option value ="Entertainment">Entertainment</ion-select-option>
+          <ion-select-option value ="Education">Education</ion-select-option>
+          <ion-select-option value ="Others">Others</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label color="primary">Description</ion-label>
+        <ion-input type = "text"  [(ngModel)]= "spendDesc" formControlName="desc"></ion-input>
+    </ion-item>
+      <ion-item>
+          <ion-label color="primary">Remark</ion-label>
+          <ion-input type = "text" [(ngModel)] = "spendRemark" formControlName="remark"></ion-input>
+      </ion-item>
+    </ion-list>
+    <div class="error-message" 
+    *ngIf="!addSpendingForm.controls.amount.valid  && 
+    addSpendingForm.controls.amount.touched" style="color:red">
+      Please enter a positive amount.
+    </div>
+    <div class="error-message" 
+    *ngIf="!addSpendingForm.controls.desc.valid  && 
+    addSpendingForm.controls.desc.touched" style="color:red">
+      Please enter a description.
+    </div>
+    <div class="error-message" 
+    *ngIf="!addSpendingForm.controls.category.valid  && 
+    addSpendingForm.controls.category.touched" style="color:red">
+      Please select a category.
+    </div>
+    <button ion-button block [disabled]="!addSpendingForm.valid">Add</button>
+    </form>
+    </ion-content>

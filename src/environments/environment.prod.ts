@@ -3,7 +3,7 @@ export const environment = {
   firebaseConfig: {
     apiKey: "AIzaSyDkbAHJp6O26H3smKLMoEDFdaat-7bNyHM",
     authDomain: "budgetplanner-eab47.firebaseapp.com",
-    databaseURL: "https://budgetplanner-eab47-default-rtdb.europe-west1.firebasedatabase.app",
+    databaseURL: "https://budgetplanner-eab47-default-rtdb.firebaseio.com/",
     projectId: "budgetplanner-eab47",
     storageBucket: "budgetplanner-eab47.appspot.com",
     messagingSenderId: "839105996451",
