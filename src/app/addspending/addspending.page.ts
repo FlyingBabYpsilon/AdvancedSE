@@ -17,13 +17,24 @@ export class AddspendingPage implements OnInit {
     spendAmt: 20,
     spendCat: 'Food',
     spendDesc: 'test',
-    spendDate: new Date().getTime()
+    spendDate: '',
   };
 
   spendingId = null;
 
   constructor(private route: ActivatedRoute, private nav: NavController, private SpendingService: SpendingService, private loadingController: LoadingController) {
   }
+
+  formatdmy(date) {
+
+    date = new Date(date);
+
+    var day = ('0' + date.getDate()).slice(-2);
+    var month = ('0' + (date.getMonth() + 1)).slice(-2);
+    var year = date.getFullYear();
+
+    return day + '-' + month + '-' + year;
+}
 
   ngOnInit() {
     this.spendingId = this.route.snapshot.params['id'];
@@ -32,6 +43,8 @@ export class AddspendingPage implements OnInit {
     }
   }
 
+
+  
   async loadSpending() {
     const loading = await this.loadingController.create({
       message: "Loading Spendings..."
@@ -43,7 +56,7 @@ export class AddspendingPage implements OnInit {
       this.spending = res;
       } else {
       this.spending = {
-      spendDate: new Date().getTime(),
+      spendDate: '',
       spendAmt: 0,
       spendCat: '',
       spendDesc: '',  
@@ -54,7 +67,6 @@ export class AddspendingPage implements OnInit {
   
 
   async saveSpending() {
- 
     const loading = await this.loadingController.create({
       message: 'Saving Spending..'
     });
@@ -75,7 +87,5 @@ export class AddspendingPage implements OnInit {
 
 
 }
-  function saveSpending() {
-    throw new Error('Function not implemented.');
-  }
+
 

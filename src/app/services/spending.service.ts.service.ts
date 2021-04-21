@@ -7,7 +7,7 @@ export interface Spending {
   spendAmt: number,
   spendCat: string,
   spendDesc: string,
-  spendDate: number
+  spendDate: string
 }
 
 @Injectable({
