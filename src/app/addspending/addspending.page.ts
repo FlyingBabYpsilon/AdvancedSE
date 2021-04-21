@@ -1,88 +1,81 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController } from '@ionic/angular';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { NavParams } from '@ionic/angular';
-import { ExpenseProvider } from '../providers/expense/expense';
+import { ActivatedRoute } from '@angular/router';
+import { NavController, LoadingController } from '@ionic/angular';
+import { Spending, SpendingService } from '../services/spending.service.ts.service';
 
 
 @Component({
   selector: 'app-addspending',
   templateUrl: './addspending.page.html',
   styleUrls: ['./addspending.page.scss'],
-  providers: [NavParams, ExpenseProvider]
 })
 
 
 export class AddspendingPage implements OnInit {
 
-  spendCate: any;
-  addSpendingForm: FormGroup;
-  public errorMessage: string;
+  spending: Spending = {
+    spendAmt: 20,
+    spendCat: 'Food',
+    spendDesc: 'test',
+    spendDate: new Date().getTime()
+  };
 
-  constructor(public navCtrl: NavController,fb:FormBuilder,public navParams: NavParams ,public expenseProvider: ExpenseProvider) { 
-    
-  this.addSpendingForm = fb.group({
-    date: [
-      "",
-      Validators.compose([Validators.required])
-    ],
-    amount: [
-      "",
-      Validators.compose([Validators.required,Validators.pattern("^[0-9]+(\.[0-9]{1,2})?$")])
-    ],
-    category: [
-      "",
-      Validators.compose([Validators.required])
-    ],
-    desc: [
-      "",
-      Validators.compose([Validators.required])
-    ],
-    remark: [
-      "",
-      
-    ]
-      });
+  spendingId = null;
 
-}
-
-formatdmy(date) {
-
-  date = new Date(date);
-
-  var day = ('0' + date.getDate()).slice(-2);
-  var month = ('0' + (date.getMonth() + 1)).slice(-2);
-  var year = date.getFullYear();
-
-  return day + '-' + month + '-' + year;
-}
-
-
-createSpending(
-  spendDate: string,
-  spentAmt: number,
-  spendDesc:string,
-  spendRemark:string, 
-  
-  ):void {
-    if(!this.addSpendingForm.valid){
-      console.log("Invalid value ");
-    }
-    console.log("desc is " + spendDesc);
-    if(spendDesc == null){
-      spendDesc ="";
-    }
-    if(spendRemark == null){
-      spendRemark = "";
-    }
-  
-    spendDate = this.formatdmy(spendDate);
-    this.expenseProvider
-    .createSpending(spendDate,spentAmt,spendDesc,spendRemark,this.spendCate)
-    ;
-}  
- 
-  ngOnInit() {
+  constructor(private route: ActivatedRoute, private nav: NavController, private SpendingService: SpendingService, private loadingController: LoadingController) {
   }
 
+  ngOnInit() {
+    this.spendingId = this.route.snapshot.params['id'];
+    if (this.spendingId)  {
+      this.loadSpending();
+    }
+  }
+
+  async loadSpending() {
+    const loading = await this.loadingController.create({
+      message: "Loading Spendings..."
+    });
+    await loading.present();
+
+    this.SpendingService.getSpending(this.spendingId).subscribe(res => {
+    if(res) {
+      this.spending = res;
+      } else {
+      this.spending = {
+      spendDate: new Date().getTime(),
+      spendAmt: 0,
+      spendCat: '',
+      spendDesc: '',  
+    }
+    }
+  });
 }
+  
+
+  async saveSpending() {
+ 
+    const loading = await this.loadingController.create({
+      message: 'Saving Spending..'
+    });
+    await loading.present();
+ 
+    if (this.spendingId) {
+      this.SpendingService.updateSpending(this.spending, this.spendingId).then(() => {
+        loading.dismiss();
+        this.nav.navigateBack('SpendingPage');
+      });
+    } else {
+      this.SpendingService.addSpending(this.spending).then(() => {
+        loading.dismiss();
+        this.nav.navigateBack('SpendingPage');
+      });
+    }
+  }
+
+
+}
+  function saveSpending() {
+    throw new Error('Function not implemented.');
+  }
+

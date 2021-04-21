@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from '@ionic/angular';
+import { Spending, SpendingService } from '../services/spending.service.ts.service';
 
 @Component({
   selector: 'app-spending',
@@ -8,25 +8,18 @@ import { NavController } from '@ionic/angular';
 })
 export class SpendingPage {
 
-  private listItems: any; 
+  spendings: Spending[];
 
-  constructor(public navCtrl: NavController) {
-    this.listItems = [{
-      name: "Imke",
-      value: 1
-    },{
-      name: "2",
-      value: 2
-    }
-  ];
-
+  constructor(private spendingService: SpendingService){}
+ 
+  ngOnInit() {
+    this.spendingService.getSpendings().subscribe(res => {
+      this.spendings = res;
+    });
   }
 
-  private onAddBtnClicked(): void{
-    this.listItems.push({
-      name: "testi",
-      value: 3
-    });
+  remove(item) {
+    this.spendingService.removeSpending(item.id);
   }
 
 }
