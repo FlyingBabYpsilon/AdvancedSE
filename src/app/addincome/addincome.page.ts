@@ -11,14 +11,27 @@ import { Income, IncomeService } from '../services/income.service';
 export class AddincomePage implements OnInit {
 
   income: Income = {
-    task: 'test',
-    priority: 0,
-    createdAt: new Date().getTime()
+    incomeAmt: 20,
+    incomeCat: 'Food',
+    incomeDesc: 'test',
+    incomeDate: 'test',
   }
 
   incomeId = null;
 
   constructor(private route: ActivatedRoute, private nav: NavController, private incomeService: IncomeService, private loadingController: LoadingController) { }
+
+  formatdmy(date) {
+
+    date = new Date(date);
+
+    var day = ('0' + date.getDate()).slice(-2);
+    var month = ('0' + (date.getMonth() + 1)).slice(-2);
+    var year = date.getFullYear();
+
+    return day + '-' + month + '-' + year;
+}
+
 
   ngOnInit() {
     this.incomeId = this.route.snapshot.params['id'];
@@ -48,12 +61,12 @@ export class AddincomePage implements OnInit {
     if(this.incomeId){
       this.incomeService.updateIncome(this.income, this.incomeId).then(() => {
         loading.dismiss();
-        this.nav.navigateBack('/income');
+        this.nav.navigateBack(['tabs/income']);
       });
     }else {
       this.incomeService.addIncome(this.income).then(() => {
         loading.dismiss();
-        this.nav.navigateBack('/income');
+        this.nav.navigateBack(['tabs/income']);
       });
     }
   }

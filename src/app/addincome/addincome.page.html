@@ -10,11 +10,27 @@
 <ion-content>
   <ion-list lines="full">
     <ion-item>
-      <ion-input required type="text" placeholder="Task" [(ngModel)]="todo.task"></ion-input>
+      <ion-label color="primary">Date</ion-label>
+      <ion-datetime displayFormat="DD/MM/YYYY" pickerFormat="DD MMM YYYY"[(ngModel)]="income.incomeDate"></ion-datetime>
+      
     </ion-item>
     <ion-item>
-      <ion-input required type="number" placeholder="Priority" [(ngModel)]="todo.priority"></ion-input>
+      <ion-label>Amount</ion-label>
+      <ion-input required type="number" placeholder="€" [(ngModel)]="income.incomeAmt"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary">Category</ion-label> 
+      <ion-select [(ngModel)]= "income.incomeCat">
+        <ion-select-option value ="Work">Work</ion-select-option>
+        <ion-select-option value ="undeclared Work">Undeclared Work</ion-select-option>
+        <ion-select-option value ="pocket money">Pocket Money</ion-select-option>
+        <ion-select-option value ="etc.">Etc.</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label>Description</ion-label>
+      <ion-input required type="string" placeholder="" [(ngModel)]="income.incomeDesc"></ion-input>
     </ion-item>
   </ion-list>
-  <ion-button expand="full" (click)="saveTodo()">Save</ion-button>
+  <ion-button expand="full" (click)="saveIncome()">Save</ion-button> 
     </ion-content>

@@ -5,9 +5,10 @@ import { map } from "rxjs/operators";
 
 export interface Income {
   id?: string;
-  task: string;
-  priority: number;
-  createdAt: number;
+  incomeDate: string;
+  incomeAmt: number;
+  incomeCat: string;
+  incomeDesc: string;
 }
  
 @Injectable({
