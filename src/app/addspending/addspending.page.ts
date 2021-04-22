@@ -75,12 +75,12 @@ export class AddspendingPage implements OnInit {
     if (this.spendingId) {
       this.SpendingService.updateSpending(this.spending, this.spendingId).then(() => {
         loading.dismiss();
-        this.nav.navigateBack('SpendingPage');
+        this.nav.navigateBack(['tabs/spending']);
       });
     } else {
       this.SpendingService.addSpending(this.spending).then(() => {
         loading.dismiss();
-        this.nav.navigateBack('SpendingPage');
+        this.nav.navigateBack(['tabs/spending']);
       });
     }
   }
