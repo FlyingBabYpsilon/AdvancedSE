@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { NavController, LoadingController } from '@ionic/angular';
-import { Spending, SpendingService } from '../services/spending.service.ts.service';
+import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { NavController, LoadingController, AlertController } from '@ionic/angular';
+import { SpendingService } from '../services/spending.service.ts.service';
 
 
 @Component({
@@ -11,81 +11,49 @@ import { Spending, SpendingService } from '../services/spending.service.ts.servi
 })
 
 
-export class AddspendingPage implements OnInit {
-
-  spending: Spending = {
-    spendAmt: 20,
-    spendCat: 'Food',
-    spendDesc: 'test',
-    spendDate: '',
-  };
-
-  spendingId = null;
-
-  constructor(private route: ActivatedRoute, private nav: NavController, private SpendingService: SpendingService, private loadingController: LoadingController) {
-  }
-
-  formatdmy(date) {
-
-    date = new Date(date);
-
-    var day = ('0' + date.getDate()).slice(-2);
-    var month = ('0' + (date.getMonth() + 1)).slice(-2);
-    var year = date.getFullYear();
-
-    return day + '-' + month + '-' + year;
-}
-
-  ngOnInit() {
-    this.spendingId = this.route.snapshot.params['id'];
-    if (this.spendingId)  {
-      this.loadSpending();
-    }
-  }
-
-
-  
-  async loadSpending() {
-    const loading = await this.loadingController.create({
-      message: "Loading Spendings..."
+export class AddspendingPage {
+  public createSpendingForm: FormGroup;
+  constructor(
+    public loadingCtrl: LoadingController,
+    public alertCtrl: AlertController,
+    private spendingService: SpendingService,
+    formBuilder: FormBuilder,
+    private nav: NavController
+  ) {
+    this.createSpendingForm = formBuilder.group({
+      spendAmt: ['', Validators.required],
+      spendCat: ['', Validators.required],
+      spendDate: ['', Validators.required],
+      spendDesc: ['', Validators.required],
     });
-    await loading.present();
-
-    this.SpendingService.getSpending(this.spendingId).subscribe(res => {
-    if(res) {
-      this.spending = res;
-      } else {
-      this.spending = {
-      spendDate: '',
-      spendAmt: 0,
-      spendCat: '',
-      spendDesc: '',  
-    }
-    }
-  });
-}
-  
-
-  async saveSpending() {
-    const loading = await this.loadingController.create({
-      message: 'Saving Spending..'
-    });
-    await loading.present();
- 
-    if (this.spendingId) {
-      this.SpendingService.updateSpending(this.spending, this.spendingId).then(() => {
-        loading.dismiss();
-        this.nav.navigateBack(['tabs/spending']);
-      });
-    } else {
-      this.SpendingService.addSpending(this.spending).then(() => {
-        loading.dismiss();
-        this.nav.navigateBack(['tabs/spending']);
-      });
-    }
   }
 
 
+  async createSpending() {
+    const loading = await this.loadingCtrl.create();
+  
+    const spendAmt = this.createSpendingForm.value.spendAmt;
+    const spendCat = this.createSpendingForm.value.spendCat;
+    const spendDate = this.createSpendingForm.value.spendDate;
+    const spendDesc = this.createSpendingForm.value.spendDesc;
+  
+    this.spendingService
+      .createSpending(spendAmt, spendCat, spendDate, spendDesc)
+      .then(
+        () => {
+          loading.dismiss().then(() => {
+            this.nav.navigateBack(['tabs/spending']);
+          });
+        },
+        error => {
+          loading.dismiss().then(() => {
+            console.error(error);
+            this.nav.navigateBack(['tabs/spending']);
+          });
+        }
+      );
+  
+    return await loading.present();
+  }
+  
 }
-
-

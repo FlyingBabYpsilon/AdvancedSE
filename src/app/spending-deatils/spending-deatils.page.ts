@@ -3,6 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { IncomeService } from '../services/income.service';
 import { Income } from '../shared/income';
 import { AlertController } from '@ionic/angular';
+import { Spending } from '../shared/spending';
+import { SpendingService } from '../services/spending.service.ts.service';
 
 
 @Component({
@@ -12,25 +14,25 @@ import { AlertController } from '@ionic/angular';
 })
 export class SpendingDeatilsPage implements OnInit {
 
-  public income: Income;
+  public spending: Spending;
  
   constructor(
-    private incomeService: IncomeService,
+    private spendingService: SpendingService,
     private route: ActivatedRoute,
     private alertController: AlertController,
     private router: Router
   ) { }
 
   ngOnInit() {
-    const incomeId: string = this.route.snapshot.paramMap.get('incomeId');
-    this.incomeService.getIncomeDetail(incomeId).subscribe(income => {
-      this.income = income;
+    const spendId: string = this.route.snapshot.paramMap.get('spendId');
+    this.spendingService.getSpendingDetail(spendId).subscribe(spending => {
+      this.spending = spending;
     });
   }
 
-  async deleteIncome(incomeId: string, incomeName: string): Promise<void> {
+  async deleteSpending(spendId: string, spendCat: string): Promise<void> {
     const alert = await this.alertController.create({
-      message: `Are you sure you want to delete this Income?`,
+      message: `Are you sure you want to delete this Spending?`,
       buttons: [
         {
           text: 'Cancel',
@@ -42,7 +44,7 @@ export class SpendingDeatilsPage implements OnInit {
         {
           text: 'Okay',
           handler: () => {
-            this.incomeService.deleteIncome(incomeId).then(() => {
+            this.spendingService.deleteSpending(spendId).then(() => {
               this.router.navigateByUrl('');
             });
           },

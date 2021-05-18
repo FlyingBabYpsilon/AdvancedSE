@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { Spending, SpendingService } from '../services/spending.service.ts.service';
+import { Observable } from 'rxjs';
+import { SpendingService } from '../services/spending.service.ts.service';
+import { Spending } from '../shared/spending';
 
 @Component({
   selector: 'app-spending',
@@ -8,18 +10,12 @@ import { Spending, SpendingService } from '../services/spending.service.ts.servi
 })
 export class SpendingPage {
 
-  spendings: Spending[];
+  public spendingList: Observable<Spending[]>
 
-  constructor(private spendingService: SpendingService){}
- 
+  constructor(private spendingService : SpendingService) {}
+  
   ngOnInit() {
-    this.spendingService.getSpendings().subscribe(res => {
-      this.spendings = res;
-    });
-  }
-
-  remove(item) {
-    this.spendingService.removeSpending(item.id);
+    this.spendingList= this.spendingService.getSpendingList();
   }
 
 }

@@ -5,43 +5,25 @@
     </ion-title>
   </ion-toolbar>
 </ion-header>
-
 <ion-content [fullscreen]="true">
 
   <ion-list>
- 
-    <ng-container *ngIf="!spending || spending.length == 0">
-      <div *ngFor="let n of [0,1,2]" padding>
-        <ion-skeleton-text></ion-skeleton-text>
-        <p>
-          <ion-skeleton-text class="fake-skeleton"></ion-skeleton-text>
-        </p>
-      </div>
-    </ng-container>
- 
-    <ion-item-sliding *ngFor="let item of todos">
-      <ion-item lines="inset" button [routerLink]="['/addspending', item.id]">
+      <ion-item
+        *ngFor="let spending of spendingList | async"
+        routerLink="/spending-deatils/{{spending.spendId}}"
+      >
         <ion-label>
-          {{ item.task }}
-          <p>{{ item.createdAt | date:'short' }}</p>
+          <h2>{{ spending.spendCat}}</h2>
+          <p> + {{ spending.spendAmt }}</p>
         </ion-label>
-        <ion-note slot="end" color="primary">{{ item.priority }}</ion-note>
       </ion-item>
- 
-      <ion-item-options side="end">
-        <ion-item-option (click)="remove(item)" color="secondary">
-          Check
-          <ion-icon name="checkmark" slot="end"></ion-icon>
-        </ion-item-option>
-      </ion-item-options>
-    </ion-item-sliding>
- 
   </ion-list>
- 
+
+  <!-- fab placed to the (vertical) center and end -->
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button routerLink="/addspending" routerDirection="forward">
+    <ion-fab-button routerLink="/addspending">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
-  </ion-fab> 
-  
+  </ion-fab>
+
 </ion-content>

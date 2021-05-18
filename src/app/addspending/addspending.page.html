@@ -7,34 +7,50 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true" class="ion-padding">
- 
-  <ion-list lines="full">
-    <ion-item>
-      <ion-label color="primary">Date</ion-label>
-      <ion-datetime displayFormat="DD/MM/YYYY" pickerFormat="DD MMM YYYY"[(ngModel)]="spending.spendDate"></ion-datetime>
-      
-    </ion-item>
-    <ion-item>
-      <ion-label>Amount</ion-label>
-      <ion-input required type="number" placeholder="€" [(ngModel)]="spending.spendAmt"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label color="primary">Category</ion-label> 
-      <ion-select [(ngModel)]= "spending.spendCat">
-        <ion-select-option value ="Food">Food</ion-select-option>
-        <ion-select-option value ="Transport">Transport</ion-select-option>
-        <ion-select-option value ="Shopping">Shopping</ion-select-option>
-        <ion-select-option value ="Entertainment">Entertainment</ion-select-option>
-        <ion-select-option value ="Education">Education</ion-select-option>
-        <ion-select-option value ="Others">Others</ion-select-option>
-      </ion-select>
-    </ion-item>
-    <ion-item>
-      <ion-label>Description</ion-label>
-      <ion-input required type="string" placeholder="" [(ngModel)]="spending.spendDesc"></ion-input>
-    </ion-item>
-  </ion-list>
-  <ion-button expand="full" (click)="saveSpending()">Save</ion-button> 
 
+<ion-content [fullscreen]="true">
+  <form [formGroup]="createSpendingForm" (submit)="createSpending()">
+    <ion-item>
+      <ion-label stacked>Spending Amount</ion-label>
+      <ion-input
+        formControlName="spendAmt"
+        type="number"
+        placeholder="how much?"
+      >
+      </ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>Spending Category</ion-label>
+      <ion-input
+        formControlName="spendCat"
+        type="string"
+      >
+     </ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>Date of Spending</ion-label>
+      <ion-input
+        formControlName="spendDate"
+        type="date"
+        placeholder="tt.mm.yyyy"
+      >
+      </ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>Spending Description</ion-label>
+      <ion-textarea
+        formControlName="spendDesc"
+        type="string"
+        placeholder="what did you do for it"
+      >
+      </ion-textarea>
+    </ion-item>
+
+    <ion-button expand="block" type="submit" [disabled]="!createSpendingForm.valid">
+      Add Spending
+    </ion-button>
+  </form>
 </ion-content>
