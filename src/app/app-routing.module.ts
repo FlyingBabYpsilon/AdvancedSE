@@ -17,7 +17,8 @@ const routes: Routes = [
   {
     path: 'login',
     loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
-  },  {
+  },
+  {
     path: 'registration',
     loadChildren: () => import('./registration/registration.module').then( m => m.RegistrationPageModule)
   },
@@ -28,7 +29,16 @@ const routes: Routes = [
   {
     path: 'logout',
     loadChildren: () => import('./logout/logout.module').then( m => m.LogoutPageModule)
+  },
+  {
+    path: 'spending-deatils/:spendingId',
+    loadChildren: () => import('./spending-deatils/spending-deatils.module').then( m => m.SpendingDeatilsPageModule)
+  },
+  {
+    path: 'income-details/:incomeIds',
+    loadChildren: () => import('./income-details/income-details.module').then( m => m.IncomeDetailsPageModule)
   }
+
 
 
 ];

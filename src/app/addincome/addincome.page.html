@@ -1,36 +1,63 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>addspending</ion-title>
+    <ion-title>New Income</ion-title>
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <ion-list lines="full">
+
+<ion-content [fullscreen]="true">
+  <form [formGroup]="createIncomeForm" (submit)="createIncome()">
     <ion-item>
-      <ion-label color="primary">Date</ion-label>
+      <ion-label stacked>Income Amount</ion-label>
+      <ion-input
+        formControlName="incomeAmt"
+        type="number"
+        placeholder="how much?"
+      >
+      </ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>Income Category</ion-label>
+      <ion-input
+        formControlName="incomeCat"
+        type="string"
+      >
+     </ion-input>
+     <ion-select>
+      <ion-select-option value ="Work">Work</ion-select-option>
+      <ion-select-option value ="undeclared Work">Undeclared Work</ion-select-option>
+      <ion-select-option value ="pocket money">Pocket Money</ion-select-option>
+      <ion-select-option value ="etc.">Etc.</ion-select-option>
+    </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>Date of Income</ion-label>
+      <ion-input
+        formControlName="incomeDate"
+        type="date"
+        placeholder="tt.mm.yyyy?"
+      >
+      </ion-input>
       <ion-datetime displayFormat="DD/MM/YYYY" pickerFormat="DD MMM YYYY"[(ngModel)]="income.incomeDate"></ion-datetime>
-      
     </ion-item>
+
     <ion-item>
-      <ion-label>Amount</ion-label>
-      <ion-input required type="number" placeholder="€" [(ngModel)]="income.incomeAmt"></ion-input>
+      <ion-label stacked>Income Description</ion-label>
+      <ion-textarea
+        formControlName="incomeDesc"
+        type="string"
+        placeholder="what did you do for it"
+      >
+      </ion-textarea>
     </ion-item>
-    <ion-item>
-      <ion-label color="primary">Category</ion-label> 
-      <ion-select [(ngModel)]= "income.incomeCat">
-        <ion-select-option value ="Work">Work</ion-select-option>
-        <ion-select-option value ="undeclared Work">Undeclared Work</ion-select-option>
-        <ion-select-option value ="pocket money">Pocket Money</ion-select-option>
-        <ion-select-option value ="etc.">Etc.</ion-select-option>
-      </ion-select>
-    </ion-item>
-    <ion-item>
-      <ion-label>Description</ion-label>
-      <ion-input required type="string" placeholder="" [(ngModel)]="income.incomeDesc"></ion-input>
-    </ion-item>
-  </ion-list>
-  <ion-button expand="full" (click)="saveIncome()">Save</ion-button> 
-    </ion-content>
+
+    <ion-button expand="block" type="submit" [disabled]="!createIncomeForm.valid">
+      Add Income
+    </ion-button>
+  </form>
+</ion-content>

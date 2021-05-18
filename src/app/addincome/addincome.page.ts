@@ -1,74 +1,57 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { LoadingController, NavController } from '@ionic/angular';
-import { Income, IncomeService } from '../services/income.service';
+import { Component } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { LoadingController, AlertController, NavController  } from '@ionic/angular';
+import { IncomeService } from '../services/income.service';
 
 @Component({
   selector: 'app-addincome',
   templateUrl: './addincome.page.html',
   styleUrls: ['./addincome.page.scss'],
 })
-export class AddincomePage implements OnInit {
-
-  income: Income = {
-    incomeAmt: 20,
-    incomeCat: 'Food',
-    incomeDesc: 'test',
-    incomeDate: 'test',
-  }
-
-  incomeId = null;
-
-  constructor(private route: ActivatedRoute, private nav: NavController, private incomeService: IncomeService, private loadingController: LoadingController) { }
-
-  formatdmy(date) {
-
-    date = new Date(date);
-
-    var day = ('0' + date.getDate()).slice(-2);
-    var month = ('0' + (date.getMonth() + 1)).slice(-2);
-    var year = date.getFullYear();
-
-    return day + '-' + month + '-' + year;
-}
-
-
-  ngOnInit() {
-    this.incomeId = this.route.snapshot.params['id'];
-    if (this.incomeId){
-      this.loadIncome();
-    }
-  }
-
-  async loadIncome() {
-    const loading = await this.loadingController.create({
-      message: 'Loading Income...'
+export class AddincomePage {
+  public createIncomeForm: FormGroup;
+  constructor(
+    public loadingCtrl: LoadingController,
+    public alertCtrl: AlertController,
+    private incomeService: IncomeService,
+    formBuilder: FormBuilder,
+    private nav: NavController
+  ) {
+    this.createIncomeForm = formBuilder.group({
+      incomeAmt: ['', Validators.required],
+      incomeCat: ['', Validators.required],
+      incomeDate: ['', Validators.required],
+      incomeDesc: ['', Validators.required],
     });
-    await loading.present();
-
-    this.incomeService.getIncome(this.incomeId).subscribe(res => {
-      loading.dismiss();
-      this.income = res;
-    })
   }
 
-  async saveIncome(){
-    const loading = await this.loadingController.create({
-      message: 'Saving Income...'
-    });
-    await loading.present();
 
-    if(this.incomeId){
-      this.incomeService.updateIncome(this.income, this.incomeId).then(() => {
-        loading.dismiss();
-        this.nav.navigateBack(['tabs/income']);
-      });
-    }else {
-      this.incomeService.addIncome(this.income).then(() => {
-        loading.dismiss();
-        this.nav.navigateBack(['tabs/income']);
-      });
-    }
+  async createIncome() {
+    const loading = await this.loadingCtrl.create();
+  
+    const incomeAmt = this.createIncomeForm.value.incomeAmt;
+    const incomeCat = this.createIncomeForm.value.incomeCat;
+    const incomeDate = this.createIncomeForm.value.incomeDate;
+    const incomeDesc = this.createIncomeForm.value.incomeDesc;
+  
+    this.incomeService
+      .createIncome(incomeAmt, incomeCat, incomeDate, incomeDesc)
+      .then(
+        () => {
+          loading.dismiss().then(() => {
+            this.nav.navigateBack(['tabs/income']);
+          });
+        },
+        error => {
+          loading.dismiss().then(() => {
+            console.error(error);
+            this.nav.navigateBack(['tabs/income']);
+          });
+        }
+      );
+  
+    return await loading.present();
   }
-
+  
 }

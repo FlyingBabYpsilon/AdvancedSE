@@ -1,7 +1,7 @@
 export class Income {
-    $key: string;
+    incomeId: string;
     incomeDate: string;
     incomeAmt: number;
-    cat: string;
-    desc: string
+    incomeCat: string;
+    incomeDesc: string;
 }

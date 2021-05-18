@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Income, IncomeService } from '../services/income.service';
+import { IncomeService } from '../services/income.service';
+import { Observable } from 'rxjs';
+import { Income } from '../shared/income';
 
 @Component({
   selector: 'app-income',
@@ -8,19 +10,13 @@ import { Income, IncomeService } from '../services/income.service';
 })
 export class IncomePage implements OnInit{
 
-  income: Income[];
+  public incomeList: Observable<Income[]>
 
-  constructor(private incomeService: IncomeService) {}
-
-
-  ngOnInit(): void {
-    this.incomeService.getIncomings().subscribe(res => {
-      this.income = res;
-    })
+  constructor(private incomeService : IncomeService) {}
+  
+  ngOnInit() {
+    this.incomeList= this.incomeService.getIncomeList();
   }
 
-  remove(item){
-    this.incomeService.removeIncome(item.id);
-  }
 
 }

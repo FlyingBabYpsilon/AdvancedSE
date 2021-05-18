@@ -1,0 +1,20 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{ incomeList.incomeCat }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+  
+<ion-content class="ion-padding">
+  <h3>You ernead </h3>
+  <p>{{ income.incomeAmt }} on  {{ income.incomeDate }}.</p>
+
+  <h3>Description</h3>
+  <p>{{ income.incomeDesc }}</p>
+  
+  <ion-button expand="block" (click)="deleteIncome(income.incomeId, income.incomeCat)">
+    DELETE INCOME
+  </ion-button>
+</ion-content>
