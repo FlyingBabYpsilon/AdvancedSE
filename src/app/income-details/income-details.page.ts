@@ -27,7 +27,7 @@ export class IncomeDetailsPage implements OnInit {
     });
   }
 
-  async deleteIncome(incomeId: string, incomeName: string): Promise<void> {
+  async deleteIncome(incomeId: string, incomeCat: string): Promise<void> {
     const alert = await this.alertController.create({
       message: `Are you sure you want to delete this Income?`,
       buttons: [

@@ -35,7 +35,7 @@ getIncomeList(): Observable<Income[]> {
 }
 
 getIncomeDetail(incomeId: string): Observable<Income> {
-  return this.firestore.collection('incomeList').doc<Income>(incomeId).valueChanges();
+  return this.firestore.collection('incomeList').doc<Income>(String(incomeId)).valueChanges();
 }
 
 deleteIncome(incomeId: string): Promise<void> {
