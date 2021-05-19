@@ -22,17 +22,12 @@
 
     <ion-item>
       <ion-label stacked>Income Category</ion-label>
-      <ion-input
-        formControlName="incomeCat"
-        type="string"
-      >
-     </ion-input>
-     <ion-select>
-      <ion-select-option value ="Work">Work</ion-select-option>
-      <ion-select-option value ="undeclared Work">Undeclared Work</ion-select-option>
-      <ion-select-option value ="pocket money">Pocket Money</ion-select-option>
-      <ion-select-option value ="etc.">Etc.</ion-select-option>
-    </ion-select>
+      <ion-select [(ngModel)]= "incomeCate" formControlName="incomeCat">
+        <ion-select-option value ="Work">Work</ion-select-option>
+        <ion-select-option value ="Undeclared Work">Undeclared Work</ion-select-option>
+        <ion-select-option value ="Pocket Money">Pocket Money</ion-select-option>
+        <ion-select-option value ="Others">Others</ion-select-option>
+      </ion-select>
     </ion-item>
 
     <ion-item>

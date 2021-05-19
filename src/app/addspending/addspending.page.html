@@ -22,11 +22,14 @@
 
     <ion-item>
       <ion-label stacked>Spending Category</ion-label>
-      <ion-input
-        formControlName="spendCat"
-        type="string"
-      >
-     </ion-input>
+      <ion-select [(ngModel)]= "spendCate" formControlName="spendCat">
+        <ion-select-option value ="Food">Food</ion-select-option>
+        <ion-select-option value ="Transport">Transport</ion-select-option>
+        <ion-select-option value ="Shopping">Shopping</ion-select-option>
+        <ion-select-option value ="Entertainment">Entertainment</ion-select-option>
+        <ion-select-option value ="Education">Education</ion-select-option>
+        <ion-select-option value ="Others">Others</ion-select-option>
+      </ion-select>
     </ion-item>
 
     <ion-item>
