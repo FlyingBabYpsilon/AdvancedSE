@@ -1,16 +1,12 @@
-import {  Component, ViewChild } from '@angular/core';
-import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
-import { ToastController } from '@ionic/angular';
+import {  AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { Chart } from 'chart.js';
-import { Observable } from 'rxjs';
-import { AuthenticationService } from '../../adapter.services/authentication-service';
 
 @Component({
   selector: 'app-landing',
   templateUrl: 'landing.page.html',
   styleUrls: ['landing.page.scss']
 })
-export class LandingPage {
+export class LandingPage implements AfterViewInit {
 
   slideOpthori ={
     direction: 'horizontal',
@@ -20,132 +16,113 @@ export class LandingPage {
     }
   }
  
-  data: Observable<any[]>;
-  ref: AngularFireList<any>;
 
-  month = [
-    {value: 0, name: 'January'},
-    {value: 1, name: 'February'},
-    {value: 2, name: 'March'},
-    {value: 3, name: 'April'},
-    {value: 4, name: 'May'},
-    {value: 5, name: 'June'},
-    {value: 6, name: 'July'},
-    {value: 7, name: 'August'},
-    {value: 8, name: 'September'},
-    {value: 9, name: 'October'},
-    {value: 10, name: 'November'},
-    {value: 11, name: 'December'}
-  ]
+  @ViewChild('barCanvas') private barCanvas: ElementRef;
+  @ViewChild('doughnutCanvas') private doughnutCanvas: ElementRef;
+  @ViewChild('lineCanvas') private lineCanvas: ElementRef;
 
-  @ViewChild('valueBarsCanvas') valueBarsCanvas;
-  valueBarsChart: any;
-  chartData = null;
+  barChart: any;
+  doughnutChart: any;
+  lineChart: any;
 
-  constructor( public authService: AuthenticationService, private db: AngularFireDatabase, private toastCtrl: ToastController) { }
+  constructor() { }
 
-  ionViewDidLoad(){
-    this.ref = this.db.list('incomeList', ref => ref.orderByChild('incomeDate'));
-  
-  this.ref.valueChanges().subscribe(result => {
-    if(this.chartData){
-      this.updateCharts(result);
-    }else{
-      this.createCharts(result);
-    }
-
-  })
+  ngAfterViewInit() {
+    this.barChartMethod();
+    this.doughnutChartMethod();
+    this.lineChartMethod();
   }
 
-  getReportValues(){
-    let reportByMonth = {
-      0: null,
-      1: null,
-      2: null,
-      3: null,
-      4: null,
-      5: null,
-      6: null,
-      7: null,
-      8: null,
-      9: null,
-      10: null,
-      11: null,
-      12: null
-    };
-  
-
-  for (let income of this.chartData){
-    if (reportByMonth[income.month]){
-      if(income.incomeAmt >= 0){
-        reportByMonth[income.month] -= +income.incomeAmt;
-      }
-    else{
-        reportByMonth[income.month] += -income.incomeAmt;
-    }}else{
-      reportByMonth[income.month] = -income.incomeAmt;
-      }
-    }
-  return Object.keys(reportByMonth).map(a => reportByMonth[a]);
-}
-
-createCharts(data) {
-  this.chartData = data;
- 
-  // Calculate Values for the Chart
-  let chartData = this.getReportValues();
- 
-  // Create the chart
-  this.valueBarsChart = new Chart(this.valueBarsCanvas.nativeElement, {
-    type: 'bar',
-    data: {
-      labels: Object.keys(this.month).map(a => this.month[a].name),
-      datasets: [{
-        data: chartData,
-        backgroundColor: '#32db64'
-      }]
-    },
-    options: {
-      legend: {
-        display: false
-      },
-      tooltips: {
-        callbacks: {
-          label: function (tooltipItems, data) {
-            return data.datasets[tooltipItems.datasetIndex].data[tooltipItems.index] +' $';
-          }
-        }
-      },
-      scales: {
-        xAxes: [{
-          ticks: {
-            beginAtZero: true
-          }
-        }],
-        yAxes: [{
-          ticks: {
-            callback: function (value, index, values) {
-              return value + '$';
-            },
-            suggestedMin: 0
-          }
+  barChartMethod() {
+    this.barChart = new Chart(this.barCanvas.nativeElement, {
+      type: 'bar',
+      data: {
+        labels: ['Income', 'Output', 'Saved'],
+        datasets: [{
+          label: '# of Votes',
+          data: [200, 50, 30, 15, 20, 34],
+          backgroundColor: [
+            'rgba(255, 99, 132, 0.2)',
+            'rgba(54, 162, 235, 0.2)',
+            'rgba(255, 206, 86, 0.2)',
+          ],
+          borderColor: [
+            'rgba(255,99,132,1)',
+            'rgba(54, 162, 235, 1)',
+            'rgba(255, 206, 86, 1)',
+          ],
+          borderWidth: 1
         }]
       },
-    }
-  });
-}
+      options: {
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero: true
+            }
+          }]
+        }
+      }
+    });
+  }
 
-updateCharts(data) {
-  this.chartData = data;
-  let chartData = this.getReportValues();
- 
-  // Update our dataset
-  this.valueBarsChart.data.datasets.forEach((dataset) => {
-    dataset.data = chartData
-  });
-  this.valueBarsChart.update();
-}
-
-
+  doughnutChartMethod() {
+    this.doughnutChart = new Chart(this.doughnutCanvas.nativeElement, {
+      type: 'doughnut',
+      data: {
+        labels: ['Category1', 'Category2', 'Category3', 'Category4', 'Category5'],
+        datasets: [{
+          label: '# of Votes',
+          data: [50, 29, 15, 10, 7],
+          backgroundColor: [
+            'rgba(255, 159, 64, 0.2)',
+            'rgba(255, 99, 132, 0.2)',
+            'rgba(54, 162, 235, 0.2)',
+            'rgba(255, 206, 86, 0.2)',
+            'rgba(75, 192, 192, 0.2)'
+          ],
+          hoverBackgroundColor: [
+            '#FFCE56',
+            '#FF6384',
+            '#36A2EB',
+            '#FFCE56',
+            '#FF6384'
+          ]
+        }]
+      }
+    });
+  }
+  lineChartMethod() {
+    this.lineChart = new Chart(this.lineCanvas.nativeElement, {
+      type: 'line',
+      data: {
+        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'November', 'December'],
+        datasets: [
+          {
+            label: 'Income per Month',
+            fill: false,
+            lineTension: 0.1,
+            backgroundColor: 'rgba(75,192,192,0.4)',
+            borderColor: 'rgba(75,192,192,1)',
+            borderCapStyle: 'butt',
+            borderDash: [],
+            borderDashOffset: 0.0,
+            borderJoinStyle: 'miter',
+            pointBorderColor: 'rgba(75,192,192,1)',
+            pointBackgroundColor: '#fff',
+            pointBorderWidth: 1,
+            pointHoverRadius: 5,
+            pointHoverBackgroundColor: 'rgba(75,192,192,1)',
+            pointHoverBorderColor: 'rgba(220,220,220,1)',
+            pointHoverBorderWidth: 2,
+            pointRadius: 1,
+            pointHitRadius: 10,
+            data: [65, 59, 80, 81, 56, 55, 40, 10, 5, 50, 10, 15],
+            spanGaps: false,
+          }
+        ]
+      }
+    });
+  }
 
 }
