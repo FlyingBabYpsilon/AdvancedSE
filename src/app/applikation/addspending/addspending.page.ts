@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NavController, LoadingController, AlertController } from '@ionic/angular';
-import { SpendingService } from '../services/spending.service.ts.service';
+import { SpendingService } from '../../adapter.services/spending.service.ts.service';
 
 
 @Component({

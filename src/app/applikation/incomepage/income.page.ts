@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { IncomeService } from '../services/income.service';
+import { IncomeService } from '../../adapter.services/income.service';
 import { Observable } from 'rxjs';
-import { Income } from '../shared/income';
+import { Income } from '../../domain.shared/income';
 
 @Component({
   selector: 'app-income',

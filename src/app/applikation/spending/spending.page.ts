@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
-import { SpendingService } from '../services/spending.service.ts.service';
-import { Spending } from '../shared/spending';
+import { SpendingService } from '../../adapter.services/spending.service.ts.service';
+import { Spending } from '../../domain.shared/spending';
 
 @Component({
   selector: 'app-spending',

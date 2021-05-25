@@ -4,39 +4,39 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
+    loadChildren: () => import('./applikation/tabs/tabs.module').then(m => m.TabsPageModule)
   },
   {
     path: 'addincome',
-    loadChildren: () => import('./addincome/addincome.module').then( m => m.AddincomePageModule)
+    loadChildren: () => import('./applikation/addincome/addincome.module').then( m => m.AddincomePageModule)
   },
   {
     path: 'addspending',
-    loadChildren: () => import('./addspending/addspending.module').then( m => m.AddspendingPageModule)
+    loadChildren: () => import('./applikation/addspending/addspending.module').then( m => m.AddspendingPageModule)
   },
   {
     path: 'login',
-    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
+    loadChildren: () => import('./applikation/login/login.module').then( m => m.LoginPageModule)
   },
   {
     path: 'registration',
-    loadChildren: () => import('./registration/registration.module').then( m => m.RegistrationPageModule)
+    loadChildren: () => import('./applikation/registration/registration.module').then( m => m.RegistrationPageModule)
   },
   {
     path: 'verify-email',
-    loadChildren: () => import('./verify-email/verify-email.module').then( m => m.VerifyEmailPageModule)
+    loadChildren: () => import('./applikation/verify-email/verify-email.module').then( m => m.VerifyEmailPageModule)
   },
   {
     path: 'logout',
-    loadChildren: () => import('./logout/logout.module').then( m => m.LogoutPageModule)
+    loadChildren: () => import('./applikation/logout/logout.module').then( m => m.LogoutPageModule)
   },
   {
     path: 'spending-deatils/:spendingId',
-    loadChildren: () => import('./spending-deatils/spending-deatils.module').then( m => m.SpendingDeatilsPageModule)
+    loadChildren: () => import('./applikation/spending-deatils/spending-deatils.module').then( m => m.SpendingDeatilsPageModule)
   },
   {
     path: 'income-details/:incomeIds',
-    loadChildren: () => import('./income-details/income-details.module').then( m => m.IncomeDetailsPageModule)
+    loadChildren: () => import('./applikation/income-details/income-details.module').then( m => m.IncomeDetailsPageModule)
   }
 
 

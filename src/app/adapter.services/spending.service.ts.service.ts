@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
-import { Spending } from '../shared/spending';
+import { Spending } from '../domain.shared/spending';
 
 @Injectable({
   providedIn: 'root'

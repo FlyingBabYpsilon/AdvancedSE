@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
-import { IncomeService } from '../services/income.service';
-import { Income } from '../shared/income';
+import { IncomeService } from '../../adapter.services/income.service';
+import { Income } from '../../domain.shared/income';
 
 @Component({
   selector: 'app-income-details',

@@ -2,8 +2,7 @@ import { isNgTemplate } from "@angular/compiler";
 import { Injectable } from "@angular/core";
 import { AngularFirestoreCollection, AngularFirestore } from "@angular/fire/firestore";
 import { Observable } from "rxjs";
-import { map } from "rxjs/operators";
-import { Income } from "../shared/income";
+import { Income } from "../domain.shared/income";
 
  
 @Injectable({

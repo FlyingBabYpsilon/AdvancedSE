@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { IncomeService } from '../services/income.service';
-import { Income } from '../shared/income';
+import { IncomeService } from '../../adapter.services/income.service';
+import { Income } from '../../domain.shared/income';
 import { AlertController } from '@ionic/angular';
-import { Spending } from '../shared/spending';
-import { SpendingService } from '../services/spending.service.ts.service';
+import { Spending } from '../../domain.shared/spending';
+import { SpendingService } from '../../adapter.services/spending.service.ts.service';
 
 
 @Component({
