@@ -1,6 +1,6 @@
 import { Component} from '@angular/core';
 import firebase from 'firebase/app';
-import { firebaseConfig } from './credentials';
+import { firebaseConfig } from './domain.shared/credentials';
 
 
 @Component({
