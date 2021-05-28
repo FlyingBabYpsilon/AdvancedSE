@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { AlertController } from '@ionic/angular';
+import { ActivatedRoute } from '@angular/router';
+import { AlertController, NavController } from '@ionic/angular';
 import { IncomeService } from '../../adapter.services/income.service';
 import { Income } from '../../domain.shared/income';
 
@@ -10,14 +10,13 @@ import { Income } from '../../domain.shared/income';
   styleUrls: ['./income-details.page.scss'],
 })
 export class IncomeDetailsPage implements OnInit {
-
   public income: Income;
  
   constructor(
     private incomeService: IncomeService,
     private route: ActivatedRoute,
     private alertController: AlertController,
-    private router: Router
+    private nav: NavController
   ) { }
 
   ngOnInit() {
@@ -27,7 +26,7 @@ export class IncomeDetailsPage implements OnInit {
     });
   }
 
-  async deleteIncome(incomeId: string, incomeCat: string): Promise<void> {
+  async deleteIncome(incomeId: string): Promise<void> {
     const alert = await this.alertController.create({
       message: `Are you sure you want to delete this Income?`,
       buttons: [
@@ -42,7 +41,7 @@ export class IncomeDetailsPage implements OnInit {
           text: 'Okay',
           handler: () => {
             this.incomeService.deleteIncome(incomeId).then(() => {
-              this.router.navigateByUrl('');
+              this.nav.navigateBack(['tabs/income']);
             });
           },
         },

@@ -35,7 +35,7 @@ const routes: Routes = [
     loadChildren: () => import('./applikation/spending-deatils/spending-deatils.module').then( m => m.SpendingDeatilsPageModule)
   },
   {
-    path: 'income-details/:incomeIds',
+    path: 'income-details/:incomeId',
     loadChildren: () => import('./applikation/income-details/income-details.module').then( m => m.IncomeDetailsPageModule)
   }
 

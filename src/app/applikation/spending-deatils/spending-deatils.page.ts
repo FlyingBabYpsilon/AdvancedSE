@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { IncomeService } from '../../adapter.services/income.service';
-import { Income } from '../../domain.shared/income';
-import { AlertController } from '@ionic/angular';
+import { ActivatedRoute } from '@angular/router';
+import { AlertController, NavController } from '@ionic/angular';
 import { Spending } from '../../domain.shared/spending';
 import { SpendingService } from '../../adapter.services/spending.service.ts.service';
 
@@ -20,7 +18,7 @@ export class SpendingDeatilsPage implements OnInit {
     private spendingService: SpendingService,
     private route: ActivatedRoute,
     private alertController: AlertController,
-    private router: Router
+    private nav: NavController
   ) { }
 
   ngOnInit() {
@@ -45,7 +43,7 @@ export class SpendingDeatilsPage implements OnInit {
           text: 'Okay',
           handler: () => {
             this.spendingService.deleteSpending(spendId).then(() => {
-              this.router.navigateByUrl('');
+              this.nav.navigateBack(['tabs/spending']);
             });
           },
         },
