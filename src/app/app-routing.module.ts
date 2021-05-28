@@ -31,7 +31,7 @@ const routes: Routes = [
     loadChildren: () => import('./applikation/logout/logout.module').then( m => m.LogoutPageModule)
   },
   {
-    path: 'spending-deatils/:spendingId',
+    path: 'spending-deatils/:spendId',
     loadChildren: () => import('./applikation/spending-deatils/spending-deatils.module').then( m => m.SpendingDeatilsPageModule)
   },
   {

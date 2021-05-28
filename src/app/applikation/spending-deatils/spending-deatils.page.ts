@@ -30,7 +30,7 @@ export class SpendingDeatilsPage implements OnInit {
     });
   }
 
-  async deleteSpending(spendId: string, spendCat: string): Promise<void> {
+  async deleteSpending(spendId: string): Promise<void> {
     const alert = await this.alertController.create({
       message: `Are you sure you want to delete this Spending?`,
       buttons: [

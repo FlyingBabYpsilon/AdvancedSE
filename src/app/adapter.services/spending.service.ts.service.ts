@@ -31,8 +31,8 @@ getSpendingList(): Observable<Spending[]> {
   return this.firestore.collection<Spending>(`spendList`).valueChanges();
 }
 
-getSpendingDetail(spendId: string): Observable<Spending> {
-  return this.firestore.collection('spendList').doc<Spending>(String(spendId)).valueChanges();
+getSpendingDetail(spendingId: string): Observable<Spending> {
+  return this.firestore.collection('spendList').doc<Spending>(String(spendingId)).valueChanges();
 }
 
 deleteSpending(spendId: string): Promise<void> {

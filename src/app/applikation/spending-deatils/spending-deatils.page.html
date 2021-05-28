@@ -3,18 +3,23 @@
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title>{{ spendList?.spendCat }}</ion-title>
+    <ion-title>{{ spending?.spendCat }}</ion-title>
   </ion-toolbar>
 </ion-header>
   
-<ion-content class="ion-padding">
-  <h3>You ernead </h3>
-  <p>{{ spendList?.spendAmt }} on  {{ spendList?.spendDate }}.</p>
+<ion-content class="ion-padding" >
 
-  <h3>Description</h3>
-  <p>{{ spendList?.spendDesc }}</p>
+<ion-card>
+    
+    <h3>You ernead </h3>
+    <p>{{ spending?.spendAmt }} on  {{ spending?.spendDate }}.</p>
+
+    <h3>Description</h3>
+    <p>{{ spending?.spendDesc }}</p>
   
-  <ion-button expand="block" (click)="deleteSpending(spendList.spendId, spendList.spendCat)">
+  <ion-button expand="block" (click)="deleteSpending(spending.spendId)">
     DELETE SPENDING
   </ion-button>
+</ion-card>
+
 </ion-content>
