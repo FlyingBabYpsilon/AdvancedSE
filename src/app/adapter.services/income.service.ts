@@ -3,7 +3,9 @@ import { AngularFirestore } from "@angular/fire/firestore";
 import { Observable } from "rxjs";
 import { Income } from "../domain.shared/income";
 
-@Injectable()
+@Injectable({
+  providedIn: "root"
+})
 
 export class IncomeService {
 

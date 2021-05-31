@@ -1,15 +1,14 @@
-import { Component,NgZone,OnInit } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/auth';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { Component,Injectable,NgZone,OnInit } from '@angular/core';
 import { Router } from "@angular/router";
 import { AuthenticationService } from "../../adapter.services/authentication-service";
-import { User } from '../../domain.shared/user';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
 })
+
+@Injectable()
 
 export class LoginPage{
  
