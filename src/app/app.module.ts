@@ -31,9 +31,6 @@ import { environment } from 'src/environments/environment';
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    AuthenticationService,
-    SpendingService,
-    IncomeService
     ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     {provide: AuthenticationService},
