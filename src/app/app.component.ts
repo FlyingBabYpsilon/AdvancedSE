@@ -1,6 +1,6 @@
 import { Component} from '@angular/core';
 import firebase from 'firebase/app';
-import { firebaseConfig } from './domain.shared/credentials';
+import { environment } from 'src/environments/environment';
 
 
 @Component({
@@ -11,7 +11,7 @@ import { firebaseConfig } from './domain.shared/credentials';
 
 export class AppComponent {
   constructor() {
-      firebase.initializeApp(firebaseConfig);
+      firebase.initializeApp(environment.firebaseConfig);
     }
 }
 

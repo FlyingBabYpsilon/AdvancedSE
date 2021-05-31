@@ -6,11 +6,9 @@ import { AuthenticationService } from '../../adapter.services/authentication-ser
   templateUrl: './verify-email.page.html',
   styleUrls: ['./verify-email.page.scss'],
 })
-export class VerifyEmailPage implements OnInit {
+export class VerifyEmailPage{
 
   constructor(public authService: AuthenticationService) { }
 
-  ngOnInit() {
-  }
 
 }

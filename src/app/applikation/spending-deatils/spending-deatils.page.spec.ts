@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
+import { SpendingService } from 'src/app/adapter.services/spending.service.ts.service';
 
 import { SpendingDeatilsPage } from './spending-deatils.page';
 
@@ -10,7 +11,7 @@ describe('SpendingDeatilsPage', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ SpendingDeatilsPage ],
-      imports: [IonicModule.forRoot()]
+      providers: [SpendingService]
     }).compileComponents();
 
     fixture = TestBed.createComponent(SpendingDeatilsPage);

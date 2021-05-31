@@ -3,9 +3,8 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { Spending } from '../domain.shared/spending';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
+
 export class SpendingService {
 
   constructor(public firestore: AngularFirestore) {}

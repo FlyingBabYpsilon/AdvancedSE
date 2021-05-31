@@ -1,13 +1,10 @@
-import { isNgTemplate } from "@angular/compiler";
 import { Injectable } from "@angular/core";
-import { AngularFirestoreCollection, AngularFirestore } from "@angular/fire/firestore";
+import { AngularFirestore } from "@angular/fire/firestore";
 import { Observable } from "rxjs";
 import { Income } from "../domain.shared/income";
 
- 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
+
 export class IncomeService {
 
   constructor(public firestore: AngularFirestore) {}
